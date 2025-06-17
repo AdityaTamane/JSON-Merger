@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --light-bg-body: #F0F4F8;
+    --light-bg-card: #FFFFFF;
+    --light-text-primary: #2C3E50;
+    --light-text-secondary: #7F8C8D;
+    --light-border-color: #E0E6ED;
+    --light-accent-blue: #3498DB;
+    --light-accent-purple: #8E44AD;
+    --light-progress-fill: linear-gradient(90deg, #667eea, #764ba2);
+    --light-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    --dark-bg-body: #1E272E;
+    --dark-bg-card: #2C3A47;
+    --dark-text-primary: #ECF0F1;
+    --dark-text-secondary: #BDC3C7;
+    --dark-border-color: #4A6372;
+    --dark-accent-blue: #5DADE2;
+    --dark-accent-purple: #AF7AC5;
+    --dark-progress-fill: linear-gradient(90deg, #7f00ff, #e100ff);
+    --dark-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --transition-speed: 0.3s ease;
+    --font-family: 'Inter', sans-serif;
+}
+
+.json-uploader {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Section titles */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--light-text-primary);
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.json-uploader.dark .section-title {
+    color: var(--dark-text-primary);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--light-accent-purple);
+    border-radius: 2px;
+}
+
+.json-uploader.dark .section-title::after {
+    background: var(--dark-accent-purple);
+}
+
+.upload-section {
+    /* This section is self-contained */
+}
+
+.dropzone {
+    border: 2px dashed var(--light-border-color);
+    border-radius: var(--border-radius-md);
+    padding: 40px;
+    text-align: center;
+    transition: all var(--transition-speed);
+    cursor: pointer;
+    background-color: var(--light-bg-card);
+    color: var(--light-text-secondary);
+}
+
+.json-uploader.dark .dropzone {
+    border-color: var(--dark-border-color);
+    background-color: var(--dark-bg-card);
+    color: var(--dark-text-secondary);
+}
+
+.dropzone:hover,
+.dropzone.active {
+    border-color: var(--light-accent-blue);
+    background-color: rgba(52, 152, 219, 0.05); /* Using new light-accent-blue */
+}
+
+.json-uploader.dark .dropzone:hover,
+.json-uploader.dark .dropzone.active {
+    border-color: var(--dark-accent-blue);
+    background-color: rgba(93, 173, 226, 0.1); /* Using new dark-accent-blue */
+}
+
+.dropzone-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--light-text-primary);
+}
+
+.json-uploader.dark .dropzone-text {
+    color: var(--dark-text-primary);
+}
+
+.dropzone-hint {
+    font-size: 0.85rem;
+    color: var(--light-text-secondary);
+}
+
+.json-uploader.dark .dropzone-hint {
+    color: var(--dark-text-secondary);
+}
+
+.usage-section {
+}
+
+.usage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.usage-item {
+    background-color: var(--light-bg-body); /* Using light-bg-body for usage items */
+    border: 1px solid var(--light-border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all var(--transition-speed);
+}
+
+.json-uploader.dark .usage-item {
+    background-color: var(--dark-bg-body); /* Using dark-bg-body for usage items */
+    border-color: var(--dark-border-color);
+}
+
+.usage-item.total-usage {
+    grid-column: 1 / -1;
+    background: var(--light-accent-purple);
+    color: white;
+    border-color: var(--light-accent-purple);
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2); /* Using new light-accent-purple */
+}
+
+.json-uploader.dark .usage-item.total-usage {
+    background: var(--dark-accent-purple);
+    border-color: var(--dark-accent-purple);
+    box-shadow: 0 4px 15px rgba(175, 122, 197, 0.2); /* Using new dark-accent-purple */
+}
+
+.usage-label {
+    font-size: 0.9rem;
+    color: var(--light-text-secondary);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.json-uploader.dark .usage-label {
+    color: var(--dark-text-secondary);
+}
+
+.usage-item.total-usage .usage-label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.usage-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--light-text-primary); /* Should inherit from parent App.css, but good to define here too */
+}
+
+.json-uploader.dark .usage-value {
+    color: var(--dark-text-primary); /* Should inherit from parent App.css, but good to define here too */
+}
+
+.usage-item.total-usage .usage-value {
+    color: white;
+}
+
+.progress-container {
+    height: 10px;
+    background-color: var(--light-border-color);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.json-uploader.dark .progress-container {
+    background-color: #555; /* A fixed grey for progress track in dark mode */
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--light-progress-fill);
+    width: 0%;
+    transition: width 0.6s ease-out;
+    border-radius: 5px;
+}
+
+.json-uploader.dark .progress-bar {
+    background: var(--dark-progress-fill);
+}
+
+.progress-label {
+    font-size: 0.85rem;
+    text-align: right;
+    color: var(--light-text-secondary);
+}
+
+.json-uploader.dark .progress-label {
+    color: var(--dark-text-secondary);
+}
+
+
+/* File List Section */
+.file-list-section {
+}
+
+.file-list-items {
+    background-color: var(--light-bg-body); /* Using light-bg-body for the list container */
+    border: 1px solid var(--light-border-color);
+    border-radius: var(--border-radius-sm);
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.json-uploader.dark .file-list-items {
+    background-color: var(--dark-bg-body); /* Using dark-bg-body for the list container */
+    border-color: var(--dark-border-color);
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--light-bg-card); /* Using light-bg-card for individual file items */
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-size: 0.9rem;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.json-uploader.dark .file-item {
+    background-color: var(--dark-bg-card); /* Using dark-bg-card for individual file items */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.file-name {
+    font-weight: 500;
+    color: var(--light-text-primary);
+    flex-grow: 1; /* Allow name to take up available space */
+    margin-right: 10px; /* Space between name and size */
+    word-break: break-all; /* Break long words */
+}
+
+.json-uploader.dark .file-name {
+    color: var(--dark-text-primary);
+}
+
+.file-size {
+    color: var(--light-accent-blue);
+    font-weight: 600;
+    margin-right: 15px; /* Space between size and button */
+    white-space: nowrap; /* Prevent size from wrapping */
+}
+
+.json-uploader.dark .file-size {
+    color: var(--dark-accent-blue);
+}
+
+.remove-file-btn {
+    background: none;
+    border: none;
+    color: var(--light-text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    line-height: 1; /* Ensure proper centering of the 'x' */
+    width: 28px; /* Fixed width for circular button */
+    height: 28px; /* Fixed height for circular button */
+    display: flex; /* Use flex to center the 'x' */
+    justify-content: center;
+    align-items: center;
+}
+
+.json-uploader.dark .remove-file-btn {
+    color: var(--dark-text-secondary);
+}
+
+.remove-file-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff4d4f; /* Red for delete action */
+    transform: scale(1.1);
+}
+
+.json-uploader.dark .remove-file-btn:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff7875;
+}
+
+.remove-file-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* Options Section */
+.options-section {
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    user-select: none;
+    color: var(--light-text-primary);
+    font-weight: 500;
+}
+
+.json-uploader.dark .checkbox-container {
+    color: var(--dark-text-primary);
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--light-border-color);
+    border-radius: 4px;
+    transition: background-color var(--transition-speed);
+}
+
+.json-uploader.dark .checkmark {
+    background-color: #555; /* A fixed grey for checkbox in dark mode */
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--light-accent-purple);
+}
+
+.json-uploader.dark .checkbox-container input:checked ~ .checkmark {
+    background-color: var(--dark-accent-purple);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.option-hint {
+    font-size: 0.85rem;
+    color: var(--light-text-secondary);
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+.json-uploader.dark .option-hint {
+    color: var(--dark-text-secondary);
+}
+
+/* Action Area */
+.action-area {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-border-color);
+    transition: border-color var(--transition-speed);
+}
+
+.json-uploader.dark .action-area {
+    border-color: var(--dark-border-color);
+}
+
+/* Merged Output Section */
+.merged-output-section {
+}
+
+.json-viewer-container {
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: box-shadow var(--transition-speed);
+}
+
+.json-uploader.dark .json-viewer-container {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.react-json-view {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.95rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .dropzone {
+        padding: 30px;
+    }
+
+    .usage-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropzone {
+        padding: 20px;
+    }
+
+    .file-item {
+        /* On very small screens, make file name and size stack, but keep remove button right */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        position: relative; /* For absolute positioning of remove button if needed */
+        padding-right: 40px; /* Make space for the button */
+    }
+    .file-name {
+        width: 100%; /* Take full width */
+        margin-right: 0;
+    }
+    .file-size {
+        width: 100%; /* Take full width */
+        margin-right: 0;
+    }
+    .remove-file-btn {
+        position: absolute; /* Position absolutely */
+        top: 8px; /* Adjust as needed */
+        right: 8px; /* Adjust as needed */
+        margin-left: 0; /* Remove auto margin */
+    }
+}

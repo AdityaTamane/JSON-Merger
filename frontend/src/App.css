@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Light Theme Colors */
+    --light-bg-body: #f8faff;
+    --light-bg-card: #ffffff;
+    --light-text-primary: #1a202c;
+    --light-text-secondary: #4a5568;
+    --light-border-color: #e2e8f0;
+    --light-accent-blue: #4299e1;
+    --light-accent-purple: #805ad5;
+    --light-progress-fill: linear-gradient(90deg, #667eea, #764ba2);
+    --light-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    /* Dark Theme Colors */
+    --dark-bg-body: #1a202c;
+    --dark-bg-card: #2d3748;
+    --dark-text-primary: #e2e8f0;
+    --dark-text-secondary: #a0aec0;
+    --dark-border-color: #4a5568;
+    --dark-accent-blue: #63b3ed;
+    --dark-accent-purple: #b794f4;
+    --dark-progress-fill: linear-gradient(90deg, #7f00ff, #e100ff);
+    --dark-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    /* Common Styles */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --transition-speed: 0.3s ease;
+    --font-family: 'Inter', sans-serif;
+}
+
+/* Base Body Styles */
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--light-bg-body); /* Default light mode background */
+    color: var(--light-text-primary); /* Default light mode text color */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dark-mode-active body { /* New selector to target body when dark mode is truly active */
+    background-color: var(--dark-bg-body);
+    color: var(--dark-text-primary);
+}
+
+
+/* Scrollbar Styles (Webkit browsers like Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-border-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--light-text-secondary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-accent-blue);
+}
+
+.dark-mode-active ::-webkit-scrollbar-track {
+    background: #3a475a; /* Darker track for dark mode */
+}
+
+.dark-mode-active ::-webkit-scrollbar-thumb {
+    background: #6a7c93; /* Darker thumb for dark mode */
+}
+
+.dark-mode-active ::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-accent-blue);
+}
+
+/* Text Selection Color */
+::selection {
+    background: rgba(var(--light-accent-blue), 0.3);
+    color: var(--light-text-primary);
+}
+
+.dark-mode-active ::selection {
+    background: rgba(var(--dark-accent-blue), 0.5);
+    color: var(--dark-text-primary);
+}
+
+
+.app-container {
+    width: 100%;
+    max-width: 960px;
+    background-color: var(--light-bg-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--light-shadow);
+    padding: 30px 40px;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Key Change: Apply dark mode classes to .app-container directly,
+   and make App.js add a global class to the body for other elements. */
+.app-container.dark-mode { /* This targets the app-container specifically */
+    background-color: var(--dark-bg-card);
+    box-shadow: var(--dark-shadow);
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--light-border-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    transition: border-color var(--transition-speed);
+}
+
+.app-container.dark-mode .app-header { /* Target when app-container is dark */
+    border-color: var(--dark-border-color);
+}
+
+.app-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--light-text-primary); /* Fallback */
+    background: linear-gradient(90deg, var(--light-accent-blue), var(--light-accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all var(--transition-speed); /* Transition for gradient too */
+}
+
+.app-container.dark-mode .app-title {
+     background: linear-gradient(90deg, var(--dark-accent-blue), var(--dark-accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Theme Toggle Switch */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--light-text-secondary);
+    transition: color var(--transition-speed);
+}
+
+.app-container.dark-mode .theme-text {
+    color: var(--dark-text-secondary);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--light-border-color);
+    transition: var(--transition-speed);
+    border-radius: 28px;
+}
+
+.app-container.dark-mode .slider {
+    background-color: #5a67d8; /* A richer blue for dark mode switch off */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: var(--transition-speed);
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--light-accent-purple); /* Purple for light mode switch on */
+}
+
+.app-container.dark-mode input:checked + .slider {
+    background-color: var(--dark-accent-purple); /* Darker purple for dark mode switch on */
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--light-accent-purple);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* Global sections padding for consistency */
+section {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-border-color);
+    transition: border-color var(--transition-speed);
+}
+
+.app-container.dark-mode section {
+    border-color: var(--dark-border-color);
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+/* General button styles for consistency */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background: var(--light-progress-fill);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    gap: 8px;
+}
+
+.app-container.dark-mode .btn-primary {
+    background: var(--dark-progress-fill);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+.app-container.dark-mode .btn-primary:disabled {
+    background: #555;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--light-border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--light-bg-card);
+    color: var(--light-text-primary);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.app-container.dark-mode input[type="text"],
+.app-container.dark-mode input[type="number"],
+.app-container.dark-mode select,
+.app-container.dark-mode textarea {
+    border-color: var(--dark-border-color);
+    background-color: var(--dark-bg-card);
+    color: var(--dark-text-primary);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--light-accent-blue);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+}
+
+.app-container.dark-mode input[type="text"]:focus,
+.app-container.dark-mode input[type="number"],
+.app-container.dark-mode select:focus,
+.app-container.dark-mode textarea:focus {
+    border-color: var(--dark-accent-blue);
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-4 { margin-top: 1rem; }
+.flex-col { display: flex; flex-direction: column; }
+.gap-md { gap: 20px; }
